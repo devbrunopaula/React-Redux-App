@@ -1,22 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../../../redux/actions/userActions'
+import Users from '../Users/Users'
+import Nav from '../../UI/Nav'
 
 function Home(props) {
-    console.log(props)
+
+
+    useEffect(() => {
+        props.getUser()
+
+    }, [])
     return (
         <div>
-            <h1>Home</h1>
-            <button onClick={() => props.getUser()}>GetUsers</button>
+            <Nav />
+
+            <Users user={props.usersData.users} />
         </div>
     )
 }
 
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
+
     return {
-        user: state => state.users
+        usersData: state.user
     }
 }
 

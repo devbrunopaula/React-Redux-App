@@ -7,7 +7,7 @@ const initalState = {
 }
 
 export const userReducer = (state = initalState, action) => {
-    console.log(action)
+
     switch (action.type) {
         case actions.FETCHING_USER:
             return {
@@ -19,6 +19,17 @@ export const userReducer = (state = initalState, action) => {
                 ...state,
                 users: action.data
             }
+        case actions.USER_FETCH_FAILED:
+            return {
+                ...state,
+                error: action.error
+            }
+        case actions.USER_DELETE_SUCCESS:
+            return {
+                ...state,
+                users: state.users.filter(user => user.id !== action.id)
+            }
+
 
         default: return state
     }
